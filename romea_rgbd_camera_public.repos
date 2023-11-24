@@ -1,0 +1,26 @@
+repositories:
+    romea_core/romea_common:
+        type: git
+        url: https://github.com/Romea/romea-core-common.git
+        version: main
+    # romea_core/romea_lidar:
+    #     type: git
+    #     url: https://github.com/Romea/romea-core-lidar.git
+    #     version: main
+
+    romea_ros2/tools/romea_common:
+        type: git
+        url: https://github.com/Romea/romea-ros2-common.git
+        version: main
+    romea_ros2/interfaces/sensors/romea_camera:
+        type: git
+        url: https://github.com/Romea/romea-ros2-camera.git
+        version: main
+    romea_ros2/interfaces/sensors/romea_stereo_camera:
+        type: git
+        url: https://github.com/Romea/romea-ros2-stereo-camera.git
+        version: main
+    romea_ros2/interfaces/sensors/romea_rgbd_camera:
+        type: git
+        url: https://github.com/Romea/romea-ros2-rgbd-camera.git
+        version: main
