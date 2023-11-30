@@ -24,7 +24,7 @@ def urdf_xml():
     mode = "simulation"
     name = "rgbd_infrared_stereo_camera"
     type = "realsense"
-    model = "d345"
+    model = "d435"
 
     configuration={}
     configuration["rgb_camera"]={
