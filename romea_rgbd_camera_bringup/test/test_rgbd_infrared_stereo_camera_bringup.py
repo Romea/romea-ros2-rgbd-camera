@@ -79,7 +79,7 @@ def test_get_infrared_camera_frame_rate(meta_description):
     assert meta_description.get_frame_rate("depth_camera") == 90
 
 def test_get_infrared_camera_resolution_(meta_description):
-    assert meta_description.get_resolution("depth_camera") == "484x480"
+    assert meta_description.get_resolution("depth_camera") == "848x480"
 
 def test_get_infrared_camera_horizontal_fov(meta_description):
     assert meta_description.get_horizontal_fov("depth_camera") == None
@@ -100,7 +100,7 @@ def test_get_sensor_configuration(meta_description):
     assert configuration["infrared_camera"]["frame_rate"] == 60 
     assert configuration["infrared_camera"]["horizontal_fov"] == None 
     assert configuration["infrared_camera"]["video_format"] == None 
-    assert configuration["depth_camera"]["resolution"] == "484x480" 
+    assert configuration["depth_camera"]["resolution"] == "848x480" 
     assert configuration["depth_camera"]["frame_rate"] == 90
     assert configuration["depth_camera"]["horizontal_fov"] == None 
     assert configuration["depth_camera"]["video_format"] == None 

@@ -47,7 +47,7 @@ def urdf():
 
 
 def test_camera_name(urdf):
-    assert urdf.find("link").get("name") == "robot_stereo_camera_link"
+    assert urdf.find("link").get("name") == "robot_rgbd_camera_link"
 
 
 def test_camera_position(urdf):
@@ -67,8 +67,8 @@ def test_camera_parent_link(urdf):
 
 
 def test_camera_rate(urdf):
-    assert urdf.find("gazebo/sensor/update_rate").text == "30"
+    assert urdf.find("gazebo/sensor/update_rate").text == "90"
 
 
 def test_plugin_namespace(urdf):
-    assert urdf.find("gazebo/sensor/plugin/ros/namespace").text == "/robot/ns/stereo_camera"
+    assert urdf.find("gazebo/sensor/plugin/ros/namespace").text == "/robot/ns/rgbd_camera"
