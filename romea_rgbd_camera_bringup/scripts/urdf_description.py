@@ -15,7 +15,7 @@
 # limitations under the License.
 
 
-from romea_stereo_camera_bringup import urdf_description
+from romea_rgbd_camera_bringup import urdf_description
 import sys
 
 if __name__ == "__main__":

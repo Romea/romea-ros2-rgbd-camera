@@ -23,9 +23,12 @@ install(PROGRAMS
 
 if(BUILD_TESTING)
   find_package(ament_cmake_pytest REQUIRED)
-  configure_file(test/test_rgbd_camera_bringup.yaml test_rgbd_camera_bringup.yaml)
-  ament_add_pytest_test(test_rgbd_camera_bringup test/test_rgbd_camera_bringup.py)
-  ament_add_pytest_test(test_urdf_description test/test_urdf_description.py)
+  configure_file(test/test_rgbd_stereo_camera_bringup.yaml test_rgbd_stereo_camera_bringup.yaml)
+  ament_add_pytest_test(test_rgbd_stereo_camera_bringup test/test_rgbd_stereo_camera_bringup.py)
+  ament_add_pytest_test(test_rgbd_stereo_camera_urdf_description test/test_rgbd_stereo_camera_urdf_description.py)
+  configure_file(test/test_rgbd_infrared_stereo_camera_bringup.yaml test_rgbd_infrared_stereo_camera_bringup.yaml)
+  ament_add_pytest_test(test_rgbd_infrared_stereo_camera_bringup test/test_rgbd_infrared_stereo_camera_bringup.py)
+  ament_add_pytest_test(test_rgbd_infrared_stereo_camera_urdf_description test/test_rgbd_infrared_stereo_camera_urdf_description.py)
 endif()
 
 ament_package()

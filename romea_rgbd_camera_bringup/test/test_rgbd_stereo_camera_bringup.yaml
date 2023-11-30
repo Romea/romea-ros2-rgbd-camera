@@ -1,9 +1,7 @@
-name: "stereo_camera"
+name: "rgbd_camera"
 namespace: "ns"
 # driver:
-#   pkg: "sick_scan"
-#   ip: "192.168.1.112"
-#   port: 2112
+#   pkg: "zed_wrapper"
 configuration:
   type: zed
   model: "1"
@@ -14,9 +12,10 @@ geometry:
   xyz: [1.0, 2.0, 3.0] # meters
   rpy: [4.0, 5.0, 6.0] # degrees
 records:
-  left/camera_info: false
-  left/image_raw: true
-  right/camera_info: false
-  right/image_raw: true
+  rgb/camera_info: false
+  rgb/image_raw: true
+  depth/camera_info: false
+  depth/image_raw: true
+  point_cloud/points: true
 ros:
   namespace: ns

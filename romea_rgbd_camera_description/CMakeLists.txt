@@ -16,7 +16,8 @@ if(BUILD_TESTING)
   # ament_lint_auto_find_test_dependencies()
 
   find_package(ament_cmake_pytest REQUIRED)
-  ament_add_pytest_test(test_gps_description test/test_rgbd_stereo_camera_description.py)
+  ament_add_pytest_test(test_rgbd_stereo_camera_description test/test_rgbd_stereo_camera_description.py)
+  ament_add_pytest_test(test_rgbd_infrared_stereo_camera_description test/test_rgbd_infrared_stereo_camera_description.py)
 endif()
 
 ament_package()

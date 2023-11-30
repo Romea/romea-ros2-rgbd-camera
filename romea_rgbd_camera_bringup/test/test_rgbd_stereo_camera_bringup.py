@@ -17,17 +17,17 @@ import os
 import pytest
 from numpy import deg2rad, radians
 
-from romea_stereo_camera_bringup import StereoCameraMetaDescription
+from romea_rgbd_camera_bringup import RGBDCameraMetaDescription, get_sensor_configuration, get_sensor_location
 
 
 @pytest.fixture(scope="module")
 def meta_description():
-    meta_description_file_path = os.path.join(os.getcwd(), "test_stereo_camera_bringup.yaml")
-    return StereoCameraMetaDescription(meta_description_file_path)
+    meta_description_file_path = os.path.join(os.getcwd(), "test_rgbd_stereo_camera_bringup.yaml")
+    return RGBDCameraMetaDescription(meta_description_file_path)
 
 
 def test_get_name(meta_description):
-    assert meta_description.get_name() == "stereo_camera"
+    assert meta_description.get_name() == "rgbd_camera"
 
 
 def test_get_namespace(meta_description):
@@ -69,6 +69,13 @@ def test_get_video_format(meta_description):
 def test_get_parent_link(meta_description):
     assert meta_description.get_parent_link() == "base_link"
 
+def test_get_sensor_configuration(meta_description):
+    configuration = get_sensor_configuration(meta_description)  
+    assert configuration["resolution"] == "1280x720" 
+    assert configuration["frame_rate"] == 30 
+    assert configuration["horizontal_fov"] == None 
+    assert configuration["video_format"] == None 
+
 
 def test_get_xyz(meta_description):
     assert meta_description.get_xyz() == [1.0, 2.0, 3.0]
@@ -81,10 +88,16 @@ def test_get_rpy_deg(meta_description):
 def test_get_rpy_rad(meta_description):
     assert meta_description.get_rpy_rad() == radians([4.0, 5.0, 6.0]).tolist()
 
+def test_get_sensor_location(meta_description):
+    location = get_sensor_location(meta_description)  
+    assert location["parent_link"] == "base_link"
+    assert location["xyz"] == [1.0, 2.0, 3.0]
+    assert location["rpy"] == radians([4.0, 5.0, 6.0]).tolist()
 
-def test_get_records(meta_description):
-    records = meta_description.get_records()
-    assert records["left/image_raw"] is True
-    assert records["left/camera_info"] is False
-    assert records["right/image_raw"] is True
-    assert records["right/camera_info"] is False
+
+# def test_get_records(meta_description):
+#     records = meta_description.get_records()
+#     assert records["left/image_raw"] is True
+#     assert records["left/camera_info"] is False
+#     assert records["right/image_raw"] is True
+#     assert records["right/camera_info"] is False

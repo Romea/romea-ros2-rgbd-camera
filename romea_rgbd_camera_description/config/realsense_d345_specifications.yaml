@@ -1,10 +1,10 @@
 infrared_projector:
-  vertical_field_of_view: 90
-  horizontal_field_of_view: 63
+  vertical_fov: 90
+  horizontal_fov: 63
 
 infrared_camera:
-  vertical_field_of_view: 42
-  horizontal_field_of_view: 69
+  vertical_fov: 42
+  horizontal_fov: 69
   resolution:
     default: 1280x720
     list: [1280x720, 848x480, 640x480, 640x360, 424x240, 320x240, 320x180]
@@ -32,31 +32,33 @@ infrared_camera:
       list: [6, 30, 60]
   image_format: Y8    
 depth_camera:
+  vertical_fov: 42
+  horizontal_fov: 69
   resolution:
     default: 1280x720
     list: [1280x720, 848x480, 640x480, 640x360, 424x240, 320x240, 320x180]
   frame_rate:
-    resolution_1280x720:  
+    1280x720:  
       default: 30
       list: [5,15, 30]
-    resolution_848X480:
+    848X480:
       default: 30
       list: [5, 15, 30, 50, 90]
-    resolution_640x480 :
+    640x480 :
       default: 30
       list: [5, 15, 30, 50, 90]
-    resolution_640x360:
+    640x360:
       default: 30
       list: [5, 15, 30, 50, 90]
-    resolution_480x270:
+    480x270:
       default: 30
       list: [5, 15, 30, 50, 90]
     resolution_424x240:
       default: 30
       list: [5, 15, 30, 50, 90]
 rgb_camera:
-  vertical_field_of_view: 42
-  horizontal_field_of_view: 69
+  vertical_fov: 42
+  horizontal_fov: 69
   resolution:
     default: 1280x720
     list: [1920x1080, 1280x720, 950X540, 848x480, 640x480, 640x360, 424x240, 320x240, 320x180]

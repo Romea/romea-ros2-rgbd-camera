@@ -22,7 +22,7 @@ from romea_rgbd_camera_description import urdf
 def urdf_xml():
     prefix = "robot_"
     mode = "simulation"
-    name = "stereo_camera"
+    name = "rgbd_stereo_camera"
     type = "zed"
     model = "1"
 
@@ -46,8 +46,11 @@ def urdf_xml():
 
 
 def test_rgbd_camera_name(urdf_xml):
-    assert urdf_xml.find("link").get("name") == "robot_stereo_camera_link"
+    pass
 
+
+def test_rgbd_camera_name(urdf_xml):
+    assert urdf_xml.find("link").get("name") == "robot_rgbd_stereo_camera_link"
 
 def test_rgbd_position(urdf_xml):
     assert urdf_xml.find("joint/origin").get("xyz") == "1.0 2.0 3.0 "

@@ -26,11 +26,11 @@ import xml.etree.ElementTree as ET
 def urdf():
 
     exe = (
-        get_package_prefix("romea_stereo_camera_bringup")
-        + "/lib/romea_stereo_camera_bringup/urdf_description.py"
+        get_package_prefix("romea_rgbd_camera_bringup")
+        + "/lib/romea_rgbd_camera_bringup/urdf_description.py"
     )
 
-    meta_description_file_path = os.path.join(os.getcwd(), "test_stereo_camera_bringup.yaml")
+    meta_description_file_path = os.path.join(os.getcwd(), "test_rgbd_camera_bringup.yaml")
 
 
     return ET.fromstring(

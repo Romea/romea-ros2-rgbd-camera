@@ -119,7 +119,7 @@
 
 
         <gazebo reference="${link_name}">
-
+          <material>Gazebo/Red</material>
           <sensor type="depth" name="${prefix}${name}">
             <update_rate>${frame_rate}</update_rate>
             <horizontal_fov>${horizontal_fov}</horizontal_fov>

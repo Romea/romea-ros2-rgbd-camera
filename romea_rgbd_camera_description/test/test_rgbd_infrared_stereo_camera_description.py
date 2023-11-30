@@ -22,11 +22,24 @@ from romea_rgbd_camera_description import urdf
 def urdf_xml():
     prefix = "robot_"
     mode = "simulation"
-    name = "stereo_camera"
-    type = "zed"
-    model = "1"
+    name = "rgbd_infrared_stereo_camera"
+    type = "realsense"
+    model = "d345"
 
-    configuration={
+    configuration={}
+    configuration["rgb_camera"]={
+        "resolution": "1280x720",
+        "frame_rate": 30,
+        "horizontal_fov": None,
+        "video_format": None,
+    }
+    configuration["infrared_camera"]={
+        "resolution": "1280x720",
+        "frame_rate": 30,
+        "horizontal_fov": None,
+        "video_format": None,
+    }
+    configuration["depth_camera"]={
         "resolution": "1280x720",
         "frame_rate": 30,
         "horizontal_fov": None,
@@ -45,8 +58,9 @@ def urdf_xml():
     return ET.fromstring(urdf(prefix, mode, name, type, model, configuration, geometry, ros_namespace))
 
 
+
 def test_rgbd_camera_name(urdf_xml):
-    assert urdf_xml.find("link").get("name") == "robot_stereo_camera_link"
+    assert urdf_xml.find("link").get("name") == "robot_rgbd_infrared_stereo_camera_link"
 
 
 def test_rgbd_position(urdf_xml):

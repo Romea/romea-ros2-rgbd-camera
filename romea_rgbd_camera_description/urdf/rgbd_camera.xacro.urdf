@@ -2,9 +2,9 @@
 <robot name="camera" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:arg name="prefix" default="" />
-  <xacro:arg name="depth_sensor_type" default=""/>
   <xacro:arg name="mode" default="simulation_gazebo" />
   <xacro:arg name="name" default="camera" />
+  <xacro:arg name="sensor_type" default=""/>
   <xacro:arg name="sensor_config_yaml_file" default="" />
   <xacro:arg name="geometry_config_yaml_file" default="" />
   <xacro:arg name="parent_link" default="base_link" />
@@ -25,8 +25,24 @@
   <xacro:property name="geometry"
     value="${load_yaml(geometry_config_yaml_file)}" />
 
+  <xacro:property name="sensor_type"
+    value="$(arg sensor_type)"/>
+
+  <xacro:if value="${sensor_type == 'infrared_stereo_camera'}"> 
+    <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_infrared_stereo_camera.xacro" />
+  </xacro:if>
   
-  <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_${depth_sensor_type}_camera.xacro" />
+  <xacro:if value="${sensor_type == 'stereo_camera'}"> 
+    <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_stereo_camera.xacro" />
+  </xacro:if>
+
+  <xacro:if value="${sensor_type == 'tof_camera'}"> 
+    <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_tof_camera.xacro" />
+  </xacro:if>
+
+
+   <!-- <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_${sensor_type}_camera.xacro" /> -->
+  <!-- <xacro:include filename="$(find romea_rgbd_camera_description)/urdf/rgbd_${arg sensor_type}_camera.xacro" /> -->
 
   <xacro:rgbd_camera_sensor
     prefix="$(arg prefix)"
