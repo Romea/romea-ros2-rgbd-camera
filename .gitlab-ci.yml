@@ -29,7 +29,7 @@ galactic_focal_build:
   script:
     - colcon build
     - source install/setup.bash
-    - colcon test --packages-select romea_stereo_camera_bringup romea_stereo_camera_description
+    - colcon test --packages-select romea_rgbd_camera_bringup romea_rgbd_camera_description
     - colcon test-result --verbose
 
 # humble
@@ -39,5 +39,5 @@ humble_jammy_build:
   script:
     - colcon build
     - source install/setup.bash
-    - colcon test --packages-select romea_stereo_camera_bringup romea_stereo_camera_description
+    - colcon test --packages-select romea_rgbd_camera_bringup romea_rgbd_camera_description
     - colcon test-result --verbose
