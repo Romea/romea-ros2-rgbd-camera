@@ -13,7 +13,7 @@ configuration:
     resolution: 424x240 # width x height
   depth_camera:
     frame_rate: 90 # hz
-    resolution: 484x480 # width x height
+    resolution: 848x480 # width x height
 geometry:
   parent_link: "base_link"
   xyz: [1.0, 2.0, 3.0] # meters

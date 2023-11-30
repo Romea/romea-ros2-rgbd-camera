@@ -41,7 +41,7 @@ depth_camera:
     1280x720:  
       default: 30
       list: [5,15, 30]
-    848X480:
+    848x480:
       default: 30
       list: [5, 15, 30, 50, 90]
     640x480 :

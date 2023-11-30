@@ -30,7 +30,7 @@ def urdf():
         + "/lib/romea_rgbd_camera_bringup/urdf_description.py"
     )
 
-    meta_description_file_path = os.path.join(os.getcwd(), "test_rgbd_camera_bringup.yaml")
+    meta_description_file_path = os.path.join(os.getcwd(), "test_rgbd_infrared_stereo_camera_bringup.yaml")
 
 
     return ET.fromstring(
