@@ -55,6 +55,7 @@ def urdf_xml():
     ros_namespace = "ns"
 
     print(urdf(prefix, mode, name, type, model, configuration, geometry, ros_namespace))
+
     return ET.fromstring(urdf(prefix, mode, name, type, model, configuration, geometry, ros_namespace))
 
 

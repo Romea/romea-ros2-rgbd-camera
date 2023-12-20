@@ -232,6 +232,9 @@ def urdf(prefix, mode, name, type, model, user_configuration, user_geometry, ros
         + "/urdf/rgbd_camera.xacro.urdf"
     )
 
+    if mode == "simulation":
+        mode += "_gazebo_classic"
+
     urdf_xml = xacro.process_file(
         xacro_file,
         mappings={
