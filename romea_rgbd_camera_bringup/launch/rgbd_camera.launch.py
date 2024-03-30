@@ -65,7 +65,7 @@ def launch_setup(context, *args, **kwargs):
         PushRosNamespace(camera_name),
     ]
 
-    if mode == "live" and meta_description.get_driver_pkg() is not None:
+    if mode == "live" and meta_description.get_driver_package() is not None:
 
         actions.append(
             IncludeLaunchDescription(
@@ -75,7 +75,7 @@ def launch_setup(context, *args, **kwargs):
                             [
                                 FindPackageShare("romea_rgbd_camera_bringup"),
                                 "launch",
-                                "drivers/" + meta_description.get_driver_pkg() + ".launch.py",
+                                "drivers/" + meta_description.get_driver_package() + ".launch.py",
                             ]
                         )
                     ]
