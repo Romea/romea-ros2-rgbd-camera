@@ -59,9 +59,6 @@ def launch_setup(context, *args, **kwargs):
     executable = LaunchConfiguration("executable").perform(context)
     frame_id = LaunchConfiguration("frame_id").perform(context)
 
-
-    print("realsense2")
-
     driver = LaunchDescription()
 
     parameters = {
@@ -137,35 +134,55 @@ def launch_setup(context, *args, **kwargs):
 
     parameters.update(driver_configuration)
 
-    print("driver parameters")
-    print(parameters)
+    # TODO factoriser les remapping
     driver_node = Node(
         package="realsense2_camera",
         executable=executable,
         output="screen",
         name="driver",
         parameters=[parameters],
+        remappings=[
+            ("driver/aligned_depth_to_color/camera_info", "aligned_depth_to_color/camera_info"),
+            ("driver/aligned_depth_to_color/image_raw", "aligned_depth_to_color/image_raw"),
+            ("driver/aligned_depth_to_color/image_raw/compressed", "aligned_depth_to_color/image_raw/compressed"),
+            ("driver/aligned_depth_to_color/image_raw/compressedDepth", "aligned_depth_to_color/image_raw/compressedDepth"),
+            ("driver/aligned_depth_to_color/image_raw/theora", "aligned_depth_to_color/image_raw/theora"),
+            ("driver/aligned_depth_to_color/metadata", "depth/metadata"),
+            ("driver/color/camera_info", "rgb/camera_info"),
+            ("driver/color/image_raw", "rgb/image_raw"),
+            ("driver/color/image_raw/compressed", "rgb/image_raw/compressed"),
+            ("driver/color/image_raw/compressedDepth", "rgb/image_raw/compressedDepth"),
+            ("driver/color/image_raw/theora", "rgb/image_raw/theora"),
+            ("driver/color/metadata", "depth/metadata"),
+            ("driver/depth/camera_info", "depth/camera_info"),
+            ("driver/depth/image_rect_raw", "depth/image_raw"),
+            ("driver/depth/image_rect_raw/compressed", "depth/image_raw/compressed"),
+            ("driver/depth/image_rect_raw/compressedDepth", "depth/image_raw/compressedDepth"),
+            ("driver/depth/image_rect_raw/theora", "depth/image_raw/theora"),
+            ("driver/depth/metadata", "depth/metadata"),
+            ("driver/infra1/camera_info", "infrared_right/camera_info"),
+            ("driver/infra1/image_rect_raw", "infrared_right/image_raw"),
+            ("driver/infra1/image_rect_raw/compressed", "infrared_right/image_raw/compressed"),
+            ("driver/infra1/image_rect_raw/compressedDepth", "infrared_right/image_raw/compressedDepth"),
+            ("driver/infra1/image_rect_raw/theora", "infrared_right/image_raw/theora"),
+            ("driver/infra1/metadata", "infrared_right/metadata"),
+            ("driver/infra2/camera_info", "infrared_left/camera_info"),
+            ("driver/infra2/image_rect_raw", "infrared_left/image_raw"),
+            ("driver/infra2/image_rect_raw/compressed", "infrared_left/image_raw/compressed"),
+            ("driver/infra2/image_rect_raw/compressedDepth", "infrared_left/image_raw/compressedDepth"),
+            ("driver/infra2/image_rect_raw/theora", "infrared_left/image_raw/theora"),
+            ("driver/infra2/metadata", "infrared_left/metadata"),
+            ("driver/depth/color/points", "points"),
+            ("driver/extrinsics/depth_to_color", "extrinsics/depth_to_color"),
+            ("driver/extrinsics/depth_to_depth", "extrinsics/depth_to_depth"),
+            ("driver/imu", "imu"),
+
+        ],
     )
 
     driver.add_action(driver_node)
 
     return [driver]
-
-
-#   this->declare_parameter("camera_name", "default_cam");
-#   this->declare_parameter("pixel_format", "yuyv");
-#   this->declare_parameter("av_device_format", "YUV422P");
-#   this->declare_parameter("brightness", 50);  // 0-255, -1 "leave alone"
-#   this->declare_parameter("contrast", -1);    // 0-255, -1 "leave alone"
-#   this->declare_parameter("saturation", -1);  // 0-255, -1 "leave alone"
-#   this->declare_parameter("sharpness", -1);   // 0-255, -1 "leave alone"
-#   this->declare_parameter("gain", -1);        // 0-100?, -1 "leave alone"
-#   this->declare_parameter("auto_white_balance", true);
-#   this->declare_parameter("white_balance", 4000);
-#   this->declare_parameter("autoexposure", true);
-#   this->declare_parameter("exposure", 100);
-#   this->declare_parameter("autofocus", false);
-#   this->declare_parameter("focus", -1);  // 0-255, -1 "leave alone"
 
 
 def generate_launch_description():
