@@ -27,8 +27,17 @@ from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
-from romea_common_bringup import device_link_name
-from romea_rgbd_camera_bringup import RGBDCameraMetaDescription
+from romea_common_bringup import device_link_name, robot_urdf_prefix
+from romea_common_description import save_device_specifications_file
+from romea_rgbd_camera_bringup import (
+    RGBDCameraMetaDescription, 
+    get_sensor_configuration
+)
+from romea_rgbd_camera_description import get_rgbd_camera_complete_configuration
+
+import tempfile
+import yaml
+import os
 
 
 def get_mode(context):
@@ -49,6 +58,12 @@ def get_meta_description(context):
 
     return RGBDCameraMetaDescription(meta_description_file_path)
 
+def generate_yaml_temp_file(prefix: str, data: dict):
+    fd, filepath = tempfile.mkstemp(prefix=prefix + "_", suffix=".yaml")
+    with os.fdopen(fd, "w") as file:
+        file.write(yaml.safe_dump(data))
+
+    return filepath
 
 def launch_setup(context, *args, **kwargs):
 
@@ -59,6 +74,16 @@ def launch_setup(context, *args, **kwargs):
     camera_name = meta_description.get_name()
     camera_namespace = str(meta_description.get_namespace() or "")
 
+    user_configuration = get_sensor_configuration(meta_description)
+
+    camera_configuration = get_rgbd_camera_complete_configuration(
+        meta_description.get_type(), meta_description.get_model(), user_configuration
+    )
+
+    camera_configuration_file_path = save_device_specifications_file(
+        robot_urdf_prefix(robot_namespace), camera_name, camera_configuration
+    )
+
     actions = [
         PushRosNamespace(robot_namespace),
         PushRosNamespace(camera_namespace),
@@ -66,6 +91,11 @@ def launch_setup(context, *args, **kwargs):
     ]
 
     if mode == "live" and meta_description.has_driver_configuration():
+
+        driver_configuration = meta_description.get_driver_parameters()
+        driver_configuration_file_path = generate_yaml_temp_file(
+            "camera_driver", driver_configuration
+        )
 
         actions.append(
             IncludeLaunchDescription(
@@ -80,14 +110,12 @@ def launch_setup(context, *args, **kwargs):
                         )
                     ]
                 ),
-                #     launch_arguments={
-                #         "ip": meta_description.get_driver_ip(),
-                #         "port": str(meta_description.get_driver_port()),
-                #         "lidar_model": meta_description.get_model(),
-                #         "rate": str(meta_description.get_rate() or ""),
-                #         "resolution": str(meta_description.get_resolution_deg() or ""),
-                #         "frame_id": device_link_name(robot_namespace, lidar_name),
-                #     }.items(),
+                launch_arguments={
+                    "executable": meta_description.get_driver_executable(),
+                    "frame_id": device_link_name(robot_namespace, camera_name),
+                    "driver_configuration_file_path": driver_configuration_file_path,
+                    "camera_configuration_file_path": camera_configuration_file_path,
+                }.items(),
             )
         )
 
@@ -110,6 +138,8 @@ def launch_setup(context, *args, **kwargs):
 
     # add launch viewer
 
+    return [GroupAction(actions)]
+    
 
 def generate_launch_description():
 

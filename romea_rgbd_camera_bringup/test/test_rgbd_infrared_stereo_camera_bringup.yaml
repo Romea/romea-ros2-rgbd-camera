@@ -1,7 +1,10 @@
 name: "rgbd_camera"
 namespace: "ns"
-# driver:
-#   pkg: "zed_wrapper"
+driver:
+  package: realsense2_camera
+  executable: realsense2_camera_node
+  parameters:
+    "device_type": "d435i"
 configuration:
   type: realsense
   model: d435

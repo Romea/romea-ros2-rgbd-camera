@@ -152,6 +152,7 @@ def get_realesense_component_configuration(
 
     configuration["image_width"] = image_width(resolution)
     configuration["image_height"] = image_height(resolution)
+    configuration["image_format"] = component_specifications["image_format"]
 
     configuration["horizontal_fov"] = (
         evaluate_rgbd_camera_parameter(
