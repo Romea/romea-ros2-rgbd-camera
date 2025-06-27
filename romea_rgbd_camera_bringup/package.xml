@@ -17,6 +17,7 @@
   <depend>romea_common_bringup</depend>
   <depend>romea_camera_bringup</depend>
   <depend>romea_rgbd_camera_description</depend>
+  <exec_depend>realsense2_camera</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
